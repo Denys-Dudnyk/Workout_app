@@ -1,0 +1,26 @@
+{
+	"name": "workout_app",
+	"version": "1.0.0",
+	"description": "",
+	"main": "server.js",
+	"type": "module",
+	"scripts": {
+		"start": "node back/server",
+		"server": "nodemon back/server",
+		"client": "npm run dev --prefix front",
+		"dev": "concurrently \"npm run server\" \"npm run client\""
+	},
+	"author": "Denys Dudnyk",
+	"license": "ISC",
+	"dependencies": {
+		"dotenv": "^16.0.1",
+		"express": "^4.18.1",
+		"mongoose": "^6.5.0"
+	},
+	"devDependencies": {
+		"colors": "^1.4.0",
+		"concurrently": "^7.3.0",
+		"morgan": "^1.10.0",
+		"nodemon": "^2.0.19"
+	}
+}
