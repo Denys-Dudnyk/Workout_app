@@ -4,11 +4,15 @@ import dotenv from 'dotenv'
 
 import colors from 'colors'
 
+/* Config */
+import { connectDB } from './config/db.js'
 /* Routes */
 
 import userRoutes from './routes/userRoutes.js'
 
 dotenv.config()
+
+connectDB()
 
 const app = express()
 
