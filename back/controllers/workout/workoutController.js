@@ -13,9 +13,24 @@ export const addNewWorkout = asyncHandler(async (req, res) => {
 	})
 	res.json(workout)
 })
+
+// @desc 		Get workout
+// @route 	GET /api/workout/:id
+// @access 	Private
+
+export const getWorkout = asyncHandler(async (req, res) => {
+	const workout = await Workout.findById(req.params.id)
+		.populate('exercises')
+		.lean()
+
+	const minutes = Math.ceil(workout.exercises.length * 3.7)
+	res.json({ ...workout, minutes })
+})
+
 /* 
 	[x] - Workout&exercise  log model
-	[] - GET workout with list exercises
+	[x] - GET workout with list exercises with calc minutes
+	[x] - Create exercisesLog by exercise in workout
 	[] - Get exercise page with previous result
 	[] - Update exercise log times + completed
 	[] - Update workoutLog completed
