@@ -2,11 +2,11 @@ import { request } from 'express'
 import asyncHandler from 'express-async-handler'
 import ExerciseLog from '../../models/exerciseLogModel.js'
 
-// @desc 		Add new exerciseLog
+// @desc 		Create new exerciseLog
 // @route 	POST /api/exercises/log
 // @access 	Private
 
-export const addNewExerciseLog = asyncHandler(async (req, res) => {
+export const createNewExerciseLog = asyncHandler(async (req, res) => {
 	const { exerciseId, times } = req.body
 
 	let timesArray = []
