@@ -31,8 +31,9 @@ export const getWorkout = asyncHandler(async (req, res) => {
 	[x] - Workout&exercise  log model
 	[x] - GET workout with list exercises with calc minutes
 	[x] - Create exercisesLog by exercise in workout
-	[] - Get exercise page with previous result
-	[] - Update exercise log times + completed
+	[x] - Get exercise page with previous result
+	[x] - Update exercise log times + completed
+	[] - Update exerciseLog completed
 	[] - Update workoutLog completed
 	[] - Update exercise & workouts
 	[] - Delete exercise & workouts
