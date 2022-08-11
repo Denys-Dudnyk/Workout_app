@@ -13,6 +13,7 @@ router
 	.route('/log')
 	.post(protect, createNewExerciseLog)
 	.put(protect, updateExerciseLog)
+//router.route('/log/completed').put(protect, updateCompleteExerciseLog)
 router.route('/log/:id').get(protect, getExerciseLog)
 
 export default router
