@@ -7,6 +7,7 @@ import {
 } from '../controllers/exercise/log/updateController.js'
 import {
 	createNewExercise,
+	deleteExercise,
 	updateExercise,
 } from '../controllers/exercise/mainController.js'
 
@@ -14,7 +15,11 @@ import { protect } from '../middleware/authMiddleware.js'
 
 const router = express.Router()
 
-router.route('/').post(protect, createNewExercise).put(protect, updateExercise)
+router
+	.route('/')
+	.post(protect, createNewExercise)
+	.put(protect, updateExercise)
+	.delete(protect, deleteExercise)
 router
 	.route('/log')
 	.post(protect, createNewExerciseLog)

@@ -7,16 +7,10 @@ const exerciseSchema = mongoose.Schema(
 			type: Number,
 			required: true,
 		},
-		imageId: {
+		imageIndex: {
 			type: Number,
-			//required: true,
+			required: true,
 		},
-
-		// statistics: {
-		// 	minutes: { type: Number, default: 0 },
-		// 	workouts: { type: Number, default: 0 },
-		// 	kgs: { type: Number, default: 0 },
-		// },
 	},
 	{
 		minimize: false,

@@ -48,6 +48,25 @@ export const updateWorkout = asyncHandler(async (req, res) => {
 	res.json(updatedWorkout)
 })
 
+// @desc 		Delete workout
+// @route 	DELETE /api/workouts
+// @access 	Private
+
+export const deleteWorkout = asyncHandler(async (req, res) => {
+	const { workoutId } = req.body
+
+	const workout = await Workout.findById(workoutId)
+
+	if (!workout) {
+		res.status(404)
+		throw new Error('This workout was not found!')
+	}
+
+	await workout.remove()
+
+	res.json({ message: 'Workout has been removed' })
+})
+
 /* 
 	[x] - Workout&exercise  log model
 	[x] - GET workout with list exercises with calc minutes
@@ -57,6 +76,6 @@ export const updateWorkout = asyncHandler(async (req, res) => {
 	[x] - Update exerciseLog completed
 	[x] - Create workoutLog completed
 	[x] - Update exercise & workouts
-	[] - Delete exercise & workouts
+	[x] - Delete exercise & workouts
 	[] - Get statistics for profile
 */
