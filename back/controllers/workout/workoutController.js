@@ -15,7 +15,7 @@ export const createNewWorkout = asyncHandler(async (req, res) => {
 })
 
 // @desc 		Get workout
-// @route 	GET /api/workout/:id
+// @route 	GET /api/workouts/:id
 // @access 	Private
 
 export const getWorkout = asyncHandler(async (req, res) => {
@@ -27,6 +27,27 @@ export const getWorkout = asyncHandler(async (req, res) => {
 	res.json({ ...workout, minutes })
 })
 
+// @desc 		Update workout
+// @route 	PUT /api/workouts
+// @access 	Private
+
+export const updateWorkout = asyncHandler(async (req, res) => {
+	const { name, exerciseIds, workoutId } = req.body
+
+	const workout = await Workout.findById(workoutId)
+
+	if (!workout) {
+		res.status(404)
+		throw new Error('This workout was not found!')
+	}
+	workout.name = name
+	workout.exercises = exerciseIds
+
+	const updatedWorkout = await workout.save()
+
+	res.json(updatedWorkout)
+})
+
 /* 
 	[x] - Workout&exercise  log model
 	[x] - GET workout with list exercises with calc minutes
@@ -35,7 +56,7 @@ export const getWorkout = asyncHandler(async (req, res) => {
 	[x] - Update exercise log times + completed
 	[x] - Update exerciseLog completed
 	[x] - Create workoutLog completed
-	[] - Update exercise & workouts
+	[x] - Update exercise & workouts
 	[] - Delete exercise & workouts
 	[] - Get statistics for profile
 */

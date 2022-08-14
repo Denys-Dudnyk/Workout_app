@@ -9,7 +9,7 @@ const exerciseSchema = mongoose.Schema(
 		},
 		imageId: {
 			type: Number,
-			required: true,
+			//required: true,
 		},
 
 		// statistics: {
