@@ -77,5 +77,5 @@ export const deleteWorkout = asyncHandler(async (req, res) => {
 	[x] - Create workoutLog completed
 	[x] - Update exercise & workouts
 	[x] - Delete exercise & workouts
-	[] - Get statistics for profile
+	[x] - Get statistics for profile
 */
