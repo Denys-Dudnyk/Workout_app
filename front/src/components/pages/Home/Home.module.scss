@@ -1,6 +1,10 @@
-.home-wrapper {
-	background-size: cover;
-	background-repeat: no-repeat;
-	background-position: center;
-	background-image: url('../../../images/home-bg.jpg');
+@import '../../../scss/variables';
+
+.heading {
+	width: 282px;
+	margin: 38px auto;
+	text-align: center;
+	font-size: 32px;
+	color: $white;
+	line-height: 1.5;
 }
