@@ -1,3 +1,5 @@
+@import './Header/Hamburger/Hamburger.module.scss';
+
 .wrapper {
 	display: flex;
 	justify-content: space-between;
@@ -5,7 +7,7 @@
 
 	height: 890px;
 	max-width: 560px;
-	width: 100%;
+	//width: 100%;
 
 	padding: 30px;
 	margin: 0 auto;

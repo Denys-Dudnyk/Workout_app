@@ -16,7 +16,7 @@ const Hamburger = () => {
 
 	return (
 		<div className={styles.wrapper}>
-			<button type='button' onClick={() => setShow(!show)}>
+			<button id='but' type='button' onClick={() => setShow(!show)}>
 				<img src={show ? hamburgerCloseImage : hamburgerImage} alt='Auth' />
 			</button>
 			<nav className={`${styles.menu} ${show ? styles.show : ''}`}>
