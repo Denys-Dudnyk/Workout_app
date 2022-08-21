@@ -1,15 +1,27 @@
 import React from 'react'
-import styles from './Header.module.scss'
-
-import userImage from '../../../images/header/user.svg'
 import Hamburger from './Hamburger/Hamburger'
 
-const Header = () => {
+import styles from './Header.module.scss'
+import userImage from '../../../images/header/user.svg'
+import arrowImage from '../../../images/header/arrow.svg'
+import { useLocation, useNavigate } from 'react-router-dom'
+
+const Header = ({ backCallback }) => {
+	//const history = useNavigate()
+	//const { location } = history
+	const auth = true
+
 	return (
 		<header className={styles.header}>
-			<button type='button'>
-				<img src={userImage} alt='Auth' />
-			</button>
+			{auth.path !== '/' ? (
+				<button type='button' onClick={backCallback}>
+					<img src={arrowImage} alt='Auth' />
+				</button>
+			) : (
+				<button type='button'>
+					<img src={userImage} alt='Auth' />
+				</button>
+			)}
 
 			<Hamburger />
 		</header>

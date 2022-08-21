@@ -3,7 +3,7 @@
 
 .wrapper {
 	position: relative;
-	z-index: 3;
+	//z-index: 3;
 
 	button {
 		position: relative;
@@ -11,7 +11,7 @@
 		border: none;
 		outline: none;
 		cursor: pointer;
-		z-index: 2;
+		//z-index: 2;
 	}
 
 	.menu {
@@ -23,8 +23,8 @@
 		background-color: rgba(0, 0, 0, 0.25);
 		padding: 10px 12px;
 
-		font-size: 14px;
-		//font-size: 22px;
+		//font-size: 14px;
+		font-size: 22px;
 		//line-height: 1.5;
 		box-shadow: $bx-16;
 		border-radius: 10px 0 10px 10px;
@@ -36,7 +36,7 @@
 		//text-transform: uppercase;
 
 		animation: opacity 0.4s;
-		z-index: 1;
+		//z-index: 1;
 		display: none;
 		backdrop-filter: blur(3px);
 
