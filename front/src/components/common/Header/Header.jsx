@@ -6,15 +6,16 @@ import userImage from '../../../images/header/user.svg'
 import arrowImage from '../../../images/header/arrow.svg'
 import { useLocation, useNavigate } from 'react-router-dom'
 
-const Header = ({ backCallback }) => {
-	//const history = useNavigate()
-	//const { location } = history
-	const auth = true
+import '../../pages/NewWorkout/NewWorkout'
+
+const Header = () => {
+	const navigate = useNavigate()
+	const { pathname } = useLocation()
 
 	return (
 		<header className={styles.header}>
-			{auth.path !== '/' ? (
-				<button type='button' onClick={backCallback}>
+			{pathname !== '/' ? (
+				<button type='button' onClick={() => navigate(-1)}>
 					<img src={arrowImage} alt='Auth' />
 				</button>
 			) : (

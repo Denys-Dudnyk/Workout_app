@@ -6,10 +6,14 @@ import styles from './Home.module.scss'
 import { useNavigate } from 'react-router-dom'
 
 const Home = () => {
-	const history = useNavigate()
+	const navigate = useNavigate()
 	return (
 		<Layout height='100%' bgImage={bgImage}>
-			<Button text='New' type='main' callback={() => history('/new-workout')} />
+			<Button
+				text='New'
+				type='main'
+				callback={() => navigate('/new-workout')}
+			/>
 			<h1 className={styles.heading}>EXERCISES FOR THE SHOULDERS</h1>
 			<Counters />
 		</Layout>

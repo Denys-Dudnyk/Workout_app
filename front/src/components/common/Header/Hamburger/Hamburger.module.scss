@@ -3,15 +3,12 @@
 
 .wrapper {
 	position: relative;
-	//z-index: 3;
 
 	button {
-		position: relative;
 		background-color: transparent;
 		border: none;
 		outline: none;
 		cursor: pointer;
-		//z-index: 2;
 	}
 
 	.menu {
@@ -23,42 +20,23 @@
 		background-color: rgba(0, 0, 0, 0.25);
 		padding: 10px 12px;
 
-		//font-size: 14px;
-		font-size: 22px;
-		//line-height: 1.5;
+		font-size: 14px;
+
 		box-shadow: $bx-16;
 		border-radius: 10px 0 10px 10px;
 		min-width: 116px;
-
-		//width: 100%;
-
-		//height: auto;
-		//text-transform: uppercase;
-
-		animation: opacity 0.4s;
-		//z-index: 1;
 		display: none;
+		animation: opacity 0.4s;
 		backdrop-filter: blur(3px);
 
 		&.show {
-			//position: absolute;
-			//filter: blur(0px);
-
 			display: block;
-			// display: flex;
-			// align-items: center;
-			// justify-content: center;
-			// text-align: center;
-			//opacity: 1;
-
-			//z-index: 1;
 		}
 		> ul {
 			list-style-type: none;
 
-			a,
-			button {
-				font-size: 14px;
+			a {
+				//font-size: 14px;
 				color: #fff;
 				text-decoration: none;
 				transition: color 0.2s ease;
