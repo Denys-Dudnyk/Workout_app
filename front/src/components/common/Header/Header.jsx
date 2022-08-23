@@ -16,7 +16,7 @@ const Header = () => {
 		<header className={styles.header}>
 			{pathname !== '/' ? (
 				<button type='button' onClick={() => navigate(-1)}>
-					<img src={arrowImage} alt='Auth' />
+					<img src={arrowImage} alt='Back' />
 				</button>
 			) : (
 				<button type='button'>
