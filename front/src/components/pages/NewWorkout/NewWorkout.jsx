@@ -11,9 +11,10 @@ import Button from '../../ui/Button/Button'
 import styles from './NewWorkout.module.scss'
 //import { optionColor } from './optionColor'
 
+const animatedComponents = makeAnimated()
+
 const NewWorkout = () => {
 	//const navigate = useNavigate()
-	const animatedComponents = makeAnimated()
 	const [name, setName] = React.useState('')
 	const [exercises, setExercises] = React.useState([])
 
@@ -22,15 +23,16 @@ const NewWorkout = () => {
 	}
 
 	const options = [
-		{ value: 1, label: 'Push-ups' },
-		{ value: 2, label: 'Pull-ups' },
+		{ value: 0, label: 'Push-ups' },
+		{ value: 1, label: 'Pull-ups' },
+		{ value: 2, label: 'Puls-ups' },
 	]
 
 	return (
 		<>
 			<Layout bgImage={bgImage} heading='Create new workout' />
-			<div className={styles.wrapper}>
-				<form onSubmit={handleSubmit}>
+			<div className='wrapper-inner-page'>
+				<form onSubmit={handleSubmit} className={styles.form}>
 					<Field
 						placeholder='Enter name'
 						value={name}
@@ -39,28 +41,18 @@ const NewWorkout = () => {
 					<Link to='/new-exercise' className='dark-link'>
 						Add new exercise
 					</Link>
-					{/* <Select
+					<Select
+						//components={animatedComponents}
 						classNamePrefix='select2-selection'
 						closeMenuOnSelect={false}
-						components={animatedComponents}
 						placeholder='Exercises...'
 						title='Exercises'
 						isMulti
 						options={options}
 						value={exercises}
 						onChange={setExercises}
-						theme={theme => optionColor(theme)}
-					/> */}
-					<Select
-						classNamePrefix='select2-selection'
-						components={animatedComponents}
-						placeholder='Exercises...'
-						//title='Exercises'
-						options={options}
-						value={exercises}
-						onChange={setExercises}
-						isMulti={true}
 					/>
+
 					<Button text='Create' callback={() => {}} />
 				</form>
 			</div>

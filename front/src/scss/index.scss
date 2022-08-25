@@ -2,8 +2,10 @@
 
 body {
 	background-color: $dark-purple;
-	padding: 0px;
+	padding: 0;
 	margin: 0;
+	//display: flex;
+	//justify-content: center;
 	color: #fff;
 }
 
@@ -80,12 +82,6 @@ img {
 }
 
 .select2-selection {
-	&__value-container {
-		&--has-value {
-			width: max-content;
-		}
-	}
-
 	&__control {
 		cursor: pointer !important;
 		margin-bottom: 2rem;
@@ -93,7 +89,7 @@ img {
 		min-height: 48px !important;
 		background-color: $purple !important;
 		border: 1px solid transparent !important;
-		color: $white !important;
+		color: $white;
 		font-size: 16px;
 		width: 100%;
 		&--is-focused {
@@ -101,12 +97,22 @@ img {
 			box-shadow: 0 0 0 1px rgba($accent, 0.3) !important;
 		}
 	}
+
+	&__value-container {
+		& > div {
+			//width: auto !important;
+			overflow: hidden !important;
+			white-space: nowrap !important;
+		}
+	}
+
 	&__menu {
 		background-color: $purple !important;
 		border-radius: 10px !important;
+
 		&-list {
+			padding: 0 !important;
 			border-radius: 10px !important;
-			padding: 0 !important ;
 		}
 
 		&-notice {
@@ -119,7 +125,7 @@ img {
 			background-color: darken($purple, 7%) !important;
 		}
 		&--is-selected {
-			background-color: darken($purple, 8%) !important ;
+			background-color: darken($purple, 8%) !important;
 		}
 	}
 
@@ -136,13 +142,16 @@ img {
 	&__single-value {
 		color: $white !important;
 	}
+
 	&__multi-value {
+		//width: min-content;
 		border-radius: 6px !important;
 		background-color: lighten($purple, 10%) !important;
-		width: max-content;
+
 		&__label {
 			color: $white !important;
 		}
+
 		&__remove:hover {
 			background-color: #8b2557 !important;
 			color: $white !important;
@@ -165,4 +174,11 @@ img {
 	&:hover {
 		color: darken($accent, 10%);
 	}
+}
+.wrapper-inner-page {
+	padding: 40px 30px;
+	text-align: center;
+	max-width: 560px;
+	width: 100%;
+	margin: 0 auto;
 }
