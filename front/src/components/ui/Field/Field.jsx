@@ -9,6 +9,7 @@ const Field = ({ placeholder, value, onChange, type = 'text' }) => {
 			value={value}
 			onChange={onChange}
 			className={styles.input}
+			required
 		/>
 	)
 }

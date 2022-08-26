@@ -1,6 +1,6 @@
 import React from 'react'
 import Select from 'react-select'
-import makeAnimated from 'react-select/animated'
+//import makeAnimated from 'react-select/animated'
 import Layout from '../../common/Layout'
 import { Link } from 'react-router-dom'
 
@@ -8,10 +8,7 @@ import bgImage from '../../../images/new-workout-bg.jpg'
 import Field from '../../ui/Field/Field'
 import Button from '../../ui/Button/Button'
 
-import styles from './NewWorkout.module.scss'
-//import { optionColor } from './optionColor'
-
-const animatedComponents = makeAnimated()
+//const animatedComponents = makeAnimated()
 
 const NewWorkout = () => {
 	//const navigate = useNavigate()
@@ -32,11 +29,12 @@ const NewWorkout = () => {
 		<>
 			<Layout bgImage={bgImage} heading='Create new workout' />
 			<div className='wrapper-inner-page'>
-				<form onSubmit={handleSubmit} className={styles.form}>
+				<form onSubmit={handleSubmit}>
 					<Field
 						placeholder='Enter name'
 						value={name}
 						onChange={e => setName(e.target.value)}
+						required
 					/>
 					<Link to='/new-exercise' className='dark-link'>
 						Add new exercise
