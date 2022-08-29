@@ -8,17 +8,34 @@ import Button from '../../ui/Button/Button'
 
 import styles from './Auth.module.scss'
 import Alert from '../../ui/Alert/Alert'
+import Loader from '../../ui/Loader'
+import { useMutation } from '@tanstack/react-query'
+import { $api } from '../../../api/api'
 
 const Auth = () => {
 	const [email, setEmail] = React.useState('')
 	const [password, setPassword] = React.useState('')
 	const [type, setType] = React.useState('auth')
+
+	const {
+		mutate: register,
+		isLoading,
+		error,
+	} = useMutation('Registration', () =>
+		$api({
+			url: '/users/profile',
+			type: 'GET',
+			body: { email, password },
+			auth: false,
+		})
+	)
+
 	const handleSubmit = e => {
 		e.preventDefault()
 		if (type === 'auth') {
 			console.log('Auth')
 		} else {
-			console.log('Reg')
+			register()
 		}
 	}
 
@@ -26,7 +43,8 @@ const Auth = () => {
 		<>
 			<Layout bgImage={bgImage} heading='Auth || Register' />
 			<div className='wrapper-inner-page'>
-				{true && <Alert type='warning' text='You have been successfully ' />}
+				{error && <Alert type='error' text={error} />}
+				{isLoading && <Loader />}
 				<form onSubmit={handleSubmit}>
 					<Field
 						type='email'
