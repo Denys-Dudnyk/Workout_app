@@ -21,14 +21,22 @@ const Auth = () => {
 		mutate: register,
 		isLoading,
 		error,
-	} = useMutation('Registration', () =>
-		$api({
-			url: '/users/profile',
-			type: 'GET',
-			body: { email, password },
-			auth: false,
-		})
+	} = useMutation(
+		() =>
+			$api({
+				url: '/users',
+				type: 'POST',
+				body: { email, password },
+				auth: false,
+			}),
+		{
+			onSuccess(data) {
+				console.log(data)
+			},
+		}
 	)
+
+	/* REACT Context auth + storage */
 
 	const handleSubmit = e => {
 		e.preventDefault()

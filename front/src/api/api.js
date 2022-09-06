@@ -7,7 +7,7 @@ const instance = axios.create({
 	},
 })
 
-export const $api = async ({ url, type = 'GET', auth = false, body }) => {
+export const $api = async ({ url, type = 'GET', auth = true, body }) => {
 	if (auth) {
 		const token = localStorage.getItem('token')
 		instance.defaults.headers.common['Authorization'] = token
