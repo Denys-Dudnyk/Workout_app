@@ -9,13 +9,29 @@ import Button from '../../ui/Button/Button'
 import styles from './Auth.module.scss'
 import Alert from '../../ui/Alert/Alert'
 import Loader from '../../ui/Loader'
+
 import { useMutation } from '@tanstack/react-query'
 import { $api } from '../../../api/api'
+import { useAuth } from '../../../hooks/useAuth'
+import { useNavigate } from 'react-router-dom'
 
 const Auth = () => {
 	const [email, setEmail] = React.useState('')
 	const [password, setPassword] = React.useState('')
 	const [type, setType] = React.useState('auth')
+
+	const navigate = useNavigate()
+	const { setIsAuth } = useAuth()
+
+	const successLogin = token => {
+		localStorage.setItem('token', token)
+
+		setIsAuth(true)
+
+		setPassword('')
+		setEmail('')
+		navigate('/', { replace: true })
+	}
 
 	const {
 		mutate: register,
@@ -31,7 +47,26 @@ const Auth = () => {
 			}),
 		{
 			onSuccess(data) {
-				console.log(data)
+				successLogin(data.token)
+			},
+		}
+	)
+
+	const {
+		mutate: auth,
+		isLoading: isLoadingAuth,
+		error: errorAuth,
+	} = useMutation(
+		() =>
+			$api({
+				url: '/users/login',
+				type: 'POST',
+				body: { email, password },
+				auth: false,
+			}),
+		{
+			onSuccess(data) {
+				successLogin(data.token)
 			},
 		}
 	)
@@ -41,7 +76,7 @@ const Auth = () => {
 	const handleSubmit = e => {
 		e.preventDefault()
 		if (type === 'auth') {
-			console.log('Auth')
+			auth()
 		} else {
 			register()
 		}
@@ -52,7 +87,8 @@ const Auth = () => {
 			<Layout bgImage={bgImage} heading='Auth || Register' />
 			<div className='wrapper-inner-page'>
 				{error && <Alert type='error' text={error} />}
-				{isLoading && <Loader />}
+				{errorAuth && <Alert type='error' text={error} />}
+				{(isLoading || isLoadingAuth) && <Loader />}
 				<form onSubmit={handleSubmit}>
 					<Field
 						type='email'
