@@ -38,6 +38,7 @@ const Auth = () => {
 		isLoading,
 		error,
 	} = useMutation(
+		['Registration'],
 		() =>
 			$api({
 				url: '/users',
@@ -57,6 +58,7 @@ const Auth = () => {
 		isLoading: isLoadingAuth,
 		error: errorAuth,
 	} = useMutation(
+		['Authorization'],
 		() =>
 			$api({
 				url: '/users/login',

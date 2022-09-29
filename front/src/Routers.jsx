@@ -1,9 +1,6 @@
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import Auth from './components/pages/Auth/Auth'
-import Error404 from './components/pages/404'
-import Home from './components/pages/Home/Home'
-import NewWorkout from './components/pages/NewWorkout/NewWorkout'
+
 import { useAuth } from './hooks/useAuth'
 import { route } from './routes'
 
