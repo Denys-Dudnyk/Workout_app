@@ -1,7 +1,7 @@
 import express from 'express'
 import morgan from 'morgan'
 import dotenv from 'dotenv'
-
+import path from 'path'
 import colors from 'colors'
 
 /* Config */
@@ -25,6 +25,9 @@ const app = express()
 if (process.env.NODE_ENV === 'development') app.use(morgan('dev'))
 
 app.use(express.json())
+
+const __dirname = path.resolve()
+app.use('/uploads', express.static(path.join(__dirname, '/uploads/')))
 
 app.use('/api/users', userRoutes)
 app.use('/api/exercises', exerciseRoutes)

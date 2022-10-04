@@ -7,8 +7,8 @@ const exerciseSchema = mongoose.Schema(
 			type: Number,
 			required: true,
 		},
-		imageIndex: {
-			type: Number,
+		imageName: {
+			type: String,
 			required: true,
 		},
 	},
