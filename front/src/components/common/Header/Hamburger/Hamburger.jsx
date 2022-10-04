@@ -39,13 +39,13 @@ const Hamburger = () => {
 				className={`${styles.menu} ${isComponentVisible ? styles.show : ''}`}
 			>
 				<ul>
-					{menu.map((item, idx) => (
-						<li key={`_menu_${idx}`}>
-							<Link to={item.link}>{item.title}</Link>
-						</li>
-					))}
-
 					<li>
+						{menu.map((item, idx) => (
+							<li key={`_menu_${idx}`}>
+								<Link to={item.link}>{item.title}</Link>
+							</li>
+						))}
+
 						<button href='/' onClick={handleLogout}>
 							Logout
 						</button>

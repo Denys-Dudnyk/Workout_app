@@ -9,6 +9,12 @@
 		border: none;
 		outline: none;
 		cursor: pointer;
+		color: $white;
+		transition: color 0.2s ease;
+		&:hover,
+		&.active {
+			color: $accent;
+		}
 	}
 
 	.menu {
@@ -33,16 +39,15 @@
 			display: block;
 		}
 		> ul {
-			list-style-type: none;
+			list-style: none;
 
 			a {
-				//font-size: 14px;
-				color: #fff;
+				color: $white;
+				font-size: 14px;
 				text-decoration: none;
 				transition: color 0.2s ease;
 				&:hover,
 				&.active {
-					//animation: 2s infinite alternate movingAn;
 					color: $accent;
 					margin: 4px 0;
 				}

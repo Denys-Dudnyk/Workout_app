@@ -4,9 +4,10 @@
 	align-items: center;
 	justify-content: space-between;
 	> .count {
+		//width: 15%;
 		font-size: 24px;
 		.heading {
-			color: $brown;
+			color: $brow;
 			text-align: center;
 			text-transform: capitalize;
 		}
