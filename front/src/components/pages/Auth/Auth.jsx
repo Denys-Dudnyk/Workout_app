@@ -1,4 +1,4 @@
-import React from 'react'
+import { useState } from 'react'
 
 import Layout from '../../common/Layout'
 
@@ -16,9 +16,9 @@ import { useAuth } from '../../../hooks/useAuth'
 import { useNavigate } from 'react-router-dom'
 
 const Auth = () => {
-	const [email, setEmail] = React.useState('')
-	const [password, setPassword] = React.useState('')
-	const [type, setType] = React.useState('auth')
+	const [email, setEmail] = useState('')
+	const [password, setPassword] = useState('')
+	const [type, setType] = useState('auth')
 
 	const navigate = useNavigate()
 	const { setIsAuth } = useAuth()
