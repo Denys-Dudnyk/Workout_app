@@ -1,13 +1,13 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { AuthContext } from '../contexts/AuthContext'
-import Routers from '../Routers'
+import App from '../App'
 
 const AppProvider = () => {
 	const [isAuth, setIsAuth] = useState(!!localStorage.getItem('token'))
 
 	return (
 		<AuthContext.Provider value={{ isAuth, setIsAuth }}>
-			<Routers />
+			<App />
 		</AuthContext.Provider>
 	)
 }

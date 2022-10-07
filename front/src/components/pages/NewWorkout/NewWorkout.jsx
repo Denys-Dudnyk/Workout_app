@@ -46,7 +46,7 @@ const NewWorkout = () => {
 		{
 			onSuccess() {
 				setName('')
-				setExercisesCurrent('')
+				setExercisesCurrent([])
 			},
 		}
 	)

@@ -13,7 +13,7 @@ import { $api } from '../../../api/api'
 
 const Profile = () => {
 	const { data, isSuccess } = useQuery(
-		['home page counter'],
+		['Profile'],
 		() =>
 			$api({
 				url: '/users/profile',
