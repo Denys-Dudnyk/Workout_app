@@ -1,7 +1,6 @@
-.wrapper {
-	padding: 50px 50px;
-
-	//max-width: 560px;
-
-	// text-align: center;
+.label {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 10px;
 }

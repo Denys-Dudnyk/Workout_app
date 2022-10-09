@@ -11,6 +11,7 @@ import { useMutation, useQuery } from '@tanstack/react-query'
 import { $api } from '../../../api/api'
 import Alert from '../../ui/Alert/Alert'
 import Loader from '../../ui/Loader'
+import styles from './NewWorkout.module.scss'
 
 //const animatedComponents = makeAnimated()
 
@@ -88,7 +89,16 @@ const NewWorkout = () => {
 							isMulti
 							options={data.map(ex => ({
 								value: ex._id,
-								label: ex.name,
+								label: (
+									<div className={styles.label}>
+										{ex.name}
+										<img
+											src={`/uploads/exercises/${ex.imageName}.svg`}
+											alt={ex.imageName}
+											height={24}
+										/>
+									</div>
+								),
 							}))}
 							value={exercisesCurrent}
 							onChange={setExercisesCurrent}
