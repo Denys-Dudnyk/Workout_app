@@ -26,7 +26,7 @@ const Profile = () => {
 		<>
 			<div
 				className={`${stylesLayout.wrapper} ${stylesLayout.otherPage}`}
-				style={{ backgroundImage: `url(${bgImage})` }}
+				style={{ backgroundImage: `url(${bgImage})`, height: 345 }}
 			>
 				<Header />
 				<div className={styles.center}>
@@ -42,7 +42,7 @@ const Profile = () => {
 						minutes={data.minutes}
 						workouts={data.workouts}
 						kgs={data.kgs}
-						type='profile'
+						//type='profile'
 					/>
 				)}
 			</div>

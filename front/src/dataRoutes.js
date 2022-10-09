@@ -3,6 +3,7 @@ import Home from './components/pages/Home/Home'
 import NewWorkout from './components/pages/NewWorkout/NewWorkout'
 import NewExercise from './components/pages/NewExercise/NewExercise'
 import Profile from './components/pages/Profile/Profile'
+import SingleWorkout from './components/pages/SingleWorkout/SingleWorkout'
 
 export const route = [
 	{
@@ -34,6 +35,12 @@ export const route = [
 	{
 		path: '/profile',
 		element: Profile,
+		exact: false,
+		auth: true,
+	},
+	{
+		path: '/workouts/:id',
+		element: SingleWorkout,
 		exact: false,
 		auth: true,
 	},
