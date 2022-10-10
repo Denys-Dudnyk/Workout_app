@@ -63,9 +63,10 @@ export const updateWorkout = asyncHandler(async (req, res) => {
 // @access 	Private
 
 export const deleteWorkout = asyncHandler(async (req, res) => {
-	const { workoutId } = req.body
+	// const { workoutId } = req.body
+	const workout = await Workout.findById(req.params.id)
 
-	const workout = await Workout.findById(workoutId)
+	//const workout = await Workout.findById(workoutId)
 
 	if (!workout) {
 		res.status(404)

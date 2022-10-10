@@ -17,8 +17,7 @@ router
 	.get(protect, getWorkouts)
 	.post(protect, createNewWorkout)
 	.put(protect, updateWorkout)
-	.delete(protect, deleteWorkout)
 router.route('/log').post(protect, createNewWorkoutLog)
-router.route('/:id').get(protect, getWorkout)
+router.route('/:id').get(protect, getWorkout).delete(protect, deleteWorkout)
 
 export default router
