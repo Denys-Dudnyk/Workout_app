@@ -7,6 +7,10 @@
 
 .wrapper {
 	> div.item {
+		cursor: pointer;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
 		margin: 0 auto;
 		margin-bottom: 30px;
 		background-color: $purple;
@@ -14,16 +18,15 @@
 		padding: 16px 20px;
 		width: 90%;
 		font-size: 20px;
-
 		border-radius: 10px;
+		transition: background-color 0.3s ease;
+		&:hover {
+			background-color: $purple-light;
+		}
 
 		> a {
 			color: $white;
 			text-decoration: none;
-			display: block;
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
 		}
 
 		&.finished {
