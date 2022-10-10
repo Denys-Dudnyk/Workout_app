@@ -33,6 +33,7 @@ const Hamburger = () => {
 					src={isComponentVisible ? hamburgerCloseImage : hamburgerImage}
 					alt='Menu'
 					height='24'
+					draggable={false}
 				/>
 			</button>
 			<nav

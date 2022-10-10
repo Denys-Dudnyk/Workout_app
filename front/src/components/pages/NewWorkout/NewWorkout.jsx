@@ -96,6 +96,7 @@ const NewWorkout = () => {
 											src={`/uploads/exercises/${ex.imageName}.svg`}
 											alt={ex.imageName}
 											height={24}
+											draggable={false}
 										/>
 									</div>
 								),

@@ -30,7 +30,7 @@ const Profile = () => {
 			>
 				<Header />
 				<div className={styles.center}>
-					<img src={userImage} alt='Profile' height='56' />
+					<img src={userImage} alt='Profile' height='56' draggable={false} />
 					<div>
 						{isSuccess && (
 							<h1 className={stylesLayout.heading}>{data.email}</h1>
@@ -53,11 +53,11 @@ const Profile = () => {
 				<div className={styles.before_after}>
 					<div>
 						<div className={styles.heading}>Before</div>
-						<img src={beforeImage} alt='Before' />
+						<img src={beforeImage} alt='Before' draggable={false} />
 					</div>
 					<div>
 						<div className={styles.heading}>After</div>
-						<img src={afterImage} alt='After' />
+						<img src={afterImage} alt='After' draggable={false} />
 					</div>
 				</div>
 			</div>
