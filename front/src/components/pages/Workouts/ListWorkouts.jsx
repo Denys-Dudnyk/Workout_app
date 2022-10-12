@@ -1,5 +1,5 @@
 import bgImage from '../../../images/workout_bg.jpg'
-import styles from './SingleWorkout.module.scss'
+import styles from './ListWorkout.module.scss'
 
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { $api } from '../../../api/api'

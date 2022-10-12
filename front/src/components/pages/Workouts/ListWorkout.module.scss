@@ -7,6 +7,10 @@
 
 .wrapper {
 	> div.item {
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
 		margin: 0 auto;
 		margin-bottom: 30px;
 		background-color: $purple;
@@ -20,10 +24,7 @@
 			background-color: $purple-light;
 		}
 
-		> button {
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
+		> span {
 			text-align: left;
 			color: $white;
 			font-size: 20px;
@@ -31,10 +32,6 @@
 			background-color: transparent;
 			border: none;
 			width: 100%;
-			cursor: pointer;
-			> span {
-				width: 100%;
-			}
 		}
 
 		&.finished {

@@ -1,14 +1,14 @@
-import { Fragment } from 'react'
 import Header from '../../common/Header/Header'
+import Alert from '../../ui/Alert/Alert'
+import { Fragment } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
+import { useMutation, useQuery } from '@tanstack/react-query'
+import { $api } from '../../../api/api'
 
-import bgImage from '../../../images/workout_bg.jpg'
 import styles from './SingleWorkout.module.scss'
 import stylesLayout from '../../common/Layout.module.scss'
-
-import { useQuery } from '@tanstack/react-query'
-import { $api } from '../../../api/api'
-import { useNavigate, useParams } from 'react-router-dom'
-import Alert from '../../ui/Alert/Alert'
+import bgImage from '../../../images/workout_bg.jpg'
+import Loader from '../../ui/Loader'
 
 const SingleWorkout = () => {
 	const { id } = useParams()
@@ -24,6 +24,27 @@ const SingleWorkout = () => {
 			refetchOnWindowFocus: false,
 		}
 	)
+
+	const {
+		mutate,
+		isSuccess: isSuccesMutate,
+		isLoading,
+		error,
+	} = useMutation(
+		['Create new exercise log'],
+		({ exId, times }) =>
+			$api({
+				url: '/exercises/log',
+				type: 'POST',
+				body: { exerciseId: exId, times },
+			}),
+		{
+			onSuccess(data) {
+				navigate(`/exercise/${data._id}`)
+			},
+		}
+	)
+
 	return (
 		<>
 			<div
@@ -39,6 +60,9 @@ const SingleWorkout = () => {
 					</div>
 				)}
 			</div>
+			{error && <Alert type='error' text={error} />}
+			{isSuccesMutate && <Alert text='Ex log created' />}
+			{isLoading && <Loader />}
 			<div
 				className='wrapper-inner-page'
 				style={{ paddingLeft: 0, paddingRight: 0 }}
@@ -49,17 +73,25 @@ const SingleWorkout = () => {
 							return (
 								<Fragment key={`ex ${idx}`}>
 									<div className={styles.item}>
-										{/* <Link to={`exercises/${ex._id}`}> */}
-										<span onClick={() => navigate(`exercises/${ex._id}`)}>
-											{ex.name}
-										</span>
-										<img
-											src={`/uploads/exercises/${ex.imageName}.svg`}
-											height='34'
-											alt=''
-											draggable={false}
-										/>
-										{/* </Link> */}
+										<button
+											aria-label='Move to exercise'
+											onClick={
+												() =>
+													mutate({
+														exId: ex._id,
+														times: ex.times,
+													})
+												// navigate(`/exercise/${ex._id}`)
+											}
+										>
+											<span>{ex.name}</span>
+											<img
+												src={`/uploads/exercises/${ex.imageName}.svg`}
+												height='34'
+												alt=''
+												draggable={false}
+											/>
+										</button>
 									</div>
 									{idx % 2 !== 0 && <div className={styles.line}></div>}
 								</Fragment>

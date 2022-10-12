@@ -5,7 +5,7 @@ import { useAuth } from './hooks/useAuth'
 import { route } from './dataRoutes'
 import Auth from './components/pages/Auth/Auth'
 
-const App = () => {
+const App = isLoading => {
 	const { isAuth } = useAuth()
 
 	return (
