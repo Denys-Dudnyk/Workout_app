@@ -8,6 +8,10 @@ import styles from './Exercises.module.scss'
 import stylesLayout from '../../common/Layout.module.scss'
 import bgImage1 from '../../../images/exercise1.jpg'
 import bgImage2 from '../../../images/exercise2.jpg'
+import checkCompletedImage from '../../../images/exercises/check_complete.svg'
+import checkImage from '../../../images/exercises/check.svg'
+
+import cn from 'classnames'
 
 const getRandomImage = (min, max) => {
 	min = Math.ceil(min)
@@ -73,10 +77,30 @@ const SingleExercises = () => {
 							</div>
 						</div>
 						{data.times.map((item, idx) => (
-							<div className={styles.row} key={`time ${idx}`}>
-								<div className={styles}>
-									<input type='text' />
+							<div
+								className={cn(styles.row, {
+									[styles.completed]: item.completed,
+								})}
+								key={`time ${idx}`}
+							>
+								<div className={styles.opacity}>
+									<input type='number' value={item.prevWeight + 'kg'} />
 									<i>/</i>
+									<input type='number' value={item.prevRepeat} />
+								</div>
+
+								<div>
+									<input type='number' value={item.weight + 'kg'} />
+									<i>/</i>
+									<input type='number' value={item.repeat} />
+								</div>
+
+								<div>
+									<img
+										src={item.completed ? checkCompletedImage : checkImage}
+										className={styles.checkbox}
+										alt=''
+									/>
 								</div>
 							</div>
 						))}

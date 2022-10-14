@@ -8,3 +8,41 @@
 		margin-right: 9px;
 	}
 }
+
+.wrapper {
+	border-radius: 10px;
+	background-color: $dark-purple;
+	min-height: 500px;
+	padding: 0 15px;
+	> .row {
+		display: flex;
+		align-items: center;
+
+		> div {
+			width: 30%;
+			padding: 15px;
+			color: $white;
+			font-size: 16px;
+			text-align: center;
+
+			&:nth-child(2) {
+				width: 50%;
+				border-left: 1px solid $purple;
+				border-right: 1px solid $purple;
+			}
+		}
+
+		&:first-child {
+			border-bottom: 1px solid $purple;
+		}
+
+		&.completed {
+			text-decoration: line-through;
+			color: $accent;
+		}
+
+		.opacity {
+			opacity: 0.7;
+		}
+	}
+}
