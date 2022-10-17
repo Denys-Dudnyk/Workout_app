@@ -1,7 +1,8 @@
+import { useEffect, useState } from 'react'
 import Header from '../../common/Header/Header'
 import Alert from '../../ui/Alert/Alert'
 import { useParams } from 'react-router-dom'
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import { $api } from '../../../api/api'
 
 import styles from './Exercises.module.scss'
@@ -21,8 +22,13 @@ const getRandomImage = (min, max) => {
 
 const SingleExercises = () => {
 	const { id } = useParams()
+	const [bgImage, setBgImage] = useState(bgImage1)
 
-	const { data, isSuccess } = useQuery(
+	useEffect(() => {
+		setBgImage(getRandomImage(1, 2) === 1 ? bgImage1 : bgImage2)
+	}, [])
+
+	const { data, isSuccess, refetch } = useQuery(
 		['Get Exercise Log'],
 		() =>
 			$api({
@@ -32,14 +38,29 @@ const SingleExercises = () => {
 			refetchOnWindowFocus: false,
 		}
 	)
+
+	const { mutate: changeState, error: errorChange } = useMutation(
+		['Change log state'],
+		({ timeIndex, key, value }) =>
+			$api({
+				url: '/exercises/log/',
+				type: 'PUT',
+				body: { timeIndex, key, value, logId: id },
+				auth: false,
+			}),
+		{
+			onSuccess(data) {
+				refetch()
+			},
+		}
+	)
+
 	return (
 		<>
 			<div
 				className={`${stylesLayout.wrapper} ${stylesLayout.otherPage}`}
 				style={{
-					backgroundImage: `url(${
-						getRandomImage(1, 2) === 1 ? bgImage1 : bgImage2
-					})`,
+					backgroundImage: `url(${bgImage})`,
 					height: 345,
 				}}
 			>
@@ -61,6 +82,10 @@ const SingleExercises = () => {
 				className='wrapper-inner-page'
 				style={{ paddingLeft: 0, paddingRight: 0 }}
 			>
+				<div style={{ width: '90%', margin: '0 auto' }}>
+					{errorChange && <Alert type='error' text={errorChange} />}
+					{/* {isLoadingChange && <Loader />} */}
+				</div>
 				{isSuccess ? (
 					<div className={styles.wrapper}>
 						<div className={styles.row}>
@@ -84,15 +109,46 @@ const SingleExercises = () => {
 								key={`time ${idx}`}
 							>
 								<div className={styles.opacity}>
-									<input type='number' value={item.prevWeight + 'kg'} />
-									<i>/</i>
-									<input type='number' value={item.prevRepeat} />
+									<input
+										type='number'
+										defaultValue={item.prevWeight}
+										disabled
+									/>
+									<i>kg{item.completed ? '' : ' '}/</i>
+									<input
+										type='number'
+										defaultValue={item.prevRepeat}
+										disabled
+									/>
 								</div>
 
 								<div>
-									<input type='number' value={item.weight + 'kg'} />
-									<i>/</i>
-									<input type='number' value={item.repeat} />
+									<input
+										type='number'
+										defaultValue={item.weight}
+										onChange={e =>
+											e.target.value &&
+											changeState({
+												timeIndex: idx,
+												key: 'weight',
+												value: e.target.value,
+											})
+										}
+									/>
+									<i>kg{item.completed ? '' : ' '}/</i>
+									<input
+										type='number'
+										defaultValue={item.repeat}
+										onChange={e =>
+											e.target.value &&
+											changeState({
+												timeIndex: idx,
+												key: 'repeat',
+												value: e.target.value,
+											})
+										}
+										disabled={item.completed}
+									/>
 								</div>
 
 								<div>
@@ -100,6 +156,13 @@ const SingleExercises = () => {
 										src={item.completed ? checkCompletedImage : checkImage}
 										className={styles.checkbox}
 										alt=''
+										onClick={() =>
+											changeState({
+												timeIndex: idx,
+												key: 'completed',
+												value: !item.completed,
+											})
+										}
 									/>
 								</div>
 							</div>

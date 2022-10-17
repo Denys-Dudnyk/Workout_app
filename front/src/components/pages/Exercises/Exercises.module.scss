@@ -1,5 +1,5 @@
 @import '../../../scss/variables';
-
+@import '../../../scss/animation';
 .heading {
 	display: flex;
 	align-items: center;
@@ -12,8 +12,8 @@
 .wrapper {
 	border-radius: 10px;
 	background-color: $dark-purple;
-	min-height: 500px;
-	padding: 0 15px;
+	margin: 0 auto;
+	width: 90%;
 	> .row {
 		display: flex;
 		align-items: center;
@@ -21,9 +21,39 @@
 		> div {
 			width: 30%;
 			padding: 15px;
-			color: $white;
-			font-size: 16px;
 			text-align: center;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			> i,
+			> span,
+			> input {
+				font-size: 18px;
+				color: $white;
+			}
+			> i {
+				margin: 0 2px;
+			}
+
+			> input {
+				border: none;
+				outline: none;
+				background-color: transparent;
+				width: 27px;
+
+				&:first-child {
+					text-align: right;
+					animation: opacity 0.4s;
+				}
+			}
+
+			> .checkbox {
+				cursor: pointer;
+			}
+
+			> i {
+				font-style: normal;
+			}
 
 			&:nth-child(2) {
 				width: 50%;
@@ -36,13 +66,27 @@
 			border-bottom: 1px solid $purple;
 		}
 
+		&:last-child > div {
+			padding-bottom: 100px;
+		}
 		&.completed {
-			text-decoration: line-through;
-			color: $accent;
+			> div {
+				color: $accent;
+				> i {
+					margin: 0 -1px;
+				}
+				> input,
+				> i {
+					color: $accent;
+					text-decoration: line-through;
+					cursor: default;
+				}
+			}
 		}
 
 		.opacity {
 			opacity: 0.7;
+			display: flex;
 		}
 	}
 }
