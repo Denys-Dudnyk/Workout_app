@@ -17,7 +17,7 @@ export const updateExerciseLog = asyncHandler(async (req, res) => {
 
 	let newTimes = currentLog.times
 
-	if (!timeIndex || !key || !value) {
+	if ((!timeIndex && timeIndex !== 0) || !key || (!value && value !== false)) {
 		res.status(404)
 		throw new Error('You have not specified all the fields!')
 	}
