@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import Header from '../../common/Header/Header'
 import Alert from '../../ui/Alert/Alert'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { $api } from '../../../api/api'
 
@@ -13,6 +13,7 @@ import checkCompletedImage from '../../../images/exercises/check_complete.svg'
 import checkImage from '../../../images/exercises/check.svg'
 
 import cn from 'classnames'
+import debounce from 'lodash.debounce'
 
 const getRandomImage = (min, max) => {
 	min = Math.ceil(min)
@@ -22,38 +23,62 @@ const getRandomImage = (min, max) => {
 
 const SingleExercises = () => {
 	const { id } = useParams()
+	const navigate = useNavigate()
+
 	const [bgImage, setBgImage] = useState(bgImage1)
 
 	useEffect(() => {
 		setBgImage(getRandomImage(1, 2) === 1 ? bgImage1 : bgImage2)
 	}, [])
 
-	const { data, isSuccess, refetch } = useQuery(
+	const { data, isSuccess, refetch, isLoading } = useQuery(
 		['Get Exercise Log'],
 		() =>
 			$api({
 				url: `/exercises/log/${id}`,
-			}),
-		{
-			refetchOnWindowFocus: false,
-		}
+			})
 	)
 
 	const { mutate: changeState, error: errorChange } = useMutation(
 		['Change log state'],
 		({ timeIndex, key, value }) =>
 			$api({
-				url: '/exercises/log/',
+				url: '/exercises/log',
 				type: 'PUT',
 				body: { timeIndex, key, value, logId: id },
-				auth: false,
 			}),
 		{
-			onSuccess(data) {
+			onSuccess() {
 				refetch()
 			},
 		}
 	)
+
+	const { mutate: setExCompleted, error: errorCompleted } = useMutation(
+		['Change log state'],
+		() =>
+			$api({
+				url: '/exercises/log/completed',
+				type: 'PUT',
+				body: { logId: id, completed: true },
+			}),
+		{
+			onSuccess() {
+				navigate(`/workout/${data.workoutLog}`)
+			},
+		}
+	)
+
+	useEffect(() => {
+		if (
+			isSuccess &&
+			data.times.length === data.times.filter(time => time.completed).length &&
+			data._id === id
+		) {
+			setExCompleted()
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [data?.times, isSuccess])
 
 	return (
 		<>
@@ -84,9 +109,9 @@ const SingleExercises = () => {
 			>
 				<div style={{ width: '90%', margin: '0 auto' }}>
 					{errorChange && <Alert type='error' text={errorChange} />}
-					{/* {isLoadingChange && <Loader />} */}
+					{errorCompleted && <Alert type='error' text={errorCompleted} />}
 				</div>
-				{isSuccess ? (
+				{isLoading || (isSuccess && data._id !== id) ? (
 					<div className={styles.wrapper}>
 						<div className={styles.row}>
 							<div>
@@ -108,7 +133,10 @@ const SingleExercises = () => {
 								})}
 								key={`time ${idx}`}
 							>
-								<div className={styles.opacity}>
+								<div
+									className={styles.opacity}
+									key={`Prev ${idx}/${item.prevWeight}`}
+								>
 									<input
 										type='number'
 										defaultValue={item.prevWeight}
@@ -122,36 +150,41 @@ const SingleExercises = () => {
 									/>
 								</div>
 
-								<div>
+								<div key={`RepeatWeight ${idx}/${item.weight}`}>
 									<input
-										type='number'
+										type='tel'
+										pattern='[0-9]*'
 										defaultValue={item.weight}
-										onChange={e =>
-											e.target.value &&
-											changeState({
-												timeIndex: idx,
-												key: 'weight',
-												value: e.target.value,
-											})
-										}
+										onChange={debounce(
+											e =>
+												e.target.value &&
+												changeState({
+													timeIndex: idx,
+													key: 'weight',
+													value: e.target.value,
+												}),
+											1000
+										)}
 									/>
 									<i>kg{item.completed ? '' : ' '}/</i>
 									<input
 										type='number'
 										defaultValue={item.repeat}
-										onChange={e =>
-											e.target.value &&
-											changeState({
-												timeIndex: idx,
-												key: 'repeat',
-												value: e.target.value,
-											})
-										}
+										onChange={debounce(
+											e =>
+												e.target.value &&
+												changeState({
+													timeIndex: idx,
+													key: 'repeat',
+													value: e.target.value,
+												}),
+											1000
+										)}
 										disabled={item.completed}
 									/>
 								</div>
 
-								<div>
+								<div key={`Completed ${idx}/${item.completed}`}>
 									<img
 										src={item.completed ? checkCompletedImage : checkImage}
 										className={styles.checkbox}

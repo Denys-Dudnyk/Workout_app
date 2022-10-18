@@ -14,7 +14,7 @@ const ListWorkouts = () => {
 	const {
 		mutate,
 		isSuccess: isSuccesMutate,
-		isLoading,
+		isLoading: isLoadingDelete,
 	} = useMutation(
 		({ workId }) =>
 			$api({
@@ -23,7 +23,7 @@ const ListWorkouts = () => {
 			}),
 		{
 			onSuccess() {
-				refetch()
+				//refetch()
 			},
 		}
 	)
@@ -34,7 +34,7 @@ const ListWorkouts = () => {
 		})
 	}
 
-	const { data, isSuccess, refetch } = useQuery(
+	const { data, isSuccess } = useQuery(
 		['Get Workouts'],
 		() =>
 			$api({
@@ -44,6 +44,27 @@ const ListWorkouts = () => {
 			refetchOnWindowFocus: false,
 		}
 	)
+
+	const {
+		mutate: createWorkoutLog,
+		isLoading,
+		isSuccess: isSuccessMutate,
+		error,
+	} = useMutation(
+		['Create new workout log'],
+		({ workoutId }) =>
+			$api({
+				url: '/workouts/log',
+				type: 'POST',
+				body: { workoutId },
+			}),
+		{
+			onSuccess(data) {
+				navigate(`/workout/${data._id}`)
+			},
+		}
+	)
+
 	return (
 		<>
 			<Layout bgImage={bgImage} heading='Workouts' />
@@ -51,14 +72,22 @@ const ListWorkouts = () => {
 				className='wrapper-inner-page'
 				style={{ paddingLeft: 0, paddingRight: 0 }}
 			>
+				{error && <Alert text={error} />}
+				{isSuccessMutate && <Alert text='Workout log created' />}
 				{isLoading && <Loader />}
-				{isSuccesMutate && <Alert text='Workout removed' />}
-				{isSuccess ? (
+				{/* {isSuccesMutate && <Alert text='Workout removed' />} */}
+				{isSuccess && (
 					<div className={styles.wrapper}>
 						{data.map((workout, idx) => (
 							<div className={styles.item} key={`workout ${idx}`}>
 								{/* <Link to={`/workouts/${workout._id}`}> */}
-								<span onClick={() => navigate(`/workouts/${workout._id}`)}>
+								<span
+									onClick={() => {
+										createWorkoutLog({
+											workoutId: workout._id,
+										})
+									}}
+								>
 									{workout.name}
 								</span>
 								<AiFillDelete
@@ -71,7 +100,8 @@ const ListWorkouts = () => {
 							</div>
 						))}
 					</div>
-				) : (
+				)}
+				{isSuccess && data?.length === 0 && (
 					<Alert type='warning' text='Workouts not found' />
 				)}
 			</div>
