@@ -32,6 +32,9 @@
 			background-color: transparent;
 			border: none;
 			width: 100%;
+			@media (max-width: $mobile) {
+				font-size: 18px;
+			}
 		}
 
 		&.finished {

@@ -23,7 +23,7 @@ const ListWorkouts = () => {
 			}),
 		{
 			onSuccess() {
-				//refetch()
+				refetch()
 			},
 		}
 	)
@@ -34,7 +34,7 @@ const ListWorkouts = () => {
 		})
 	}
 
-	const { data, isSuccess } = useQuery(
+	const { data, isSuccess, refetch } = useQuery(
 		['Get Workouts'],
 		() =>
 			$api({
@@ -74,13 +74,12 @@ const ListWorkouts = () => {
 			>
 				{error && <Alert text={error} />}
 				{isSuccessMutate && <Alert text='Workout log created' />}
-				{isLoading && <Loader />}
-				{/* {isSuccesMutate && <Alert text='Workout removed' />} */}
+				{(isLoading || isLoadingDelete) && <Loader />}
+				{isSuccesMutate && <Alert text='Workout removed' />}
 				{isSuccess && (
 					<div className={styles.wrapper}>
 						{data.map((workout, idx) => (
 							<div className={styles.item} key={`workout ${idx}`}>
-								{/* <Link to={`/workouts/${workout._id}`}> */}
 								<span
 									onClick={() => {
 										createWorkoutLog({
@@ -96,7 +95,6 @@ const ListWorkouts = () => {
 									title='Delete'
 									onClick={() => handleDelete(workout._id)}
 								/>
-								{/* </Link> */}
 							</div>
 						))}
 					</div>

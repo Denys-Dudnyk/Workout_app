@@ -14,6 +14,7 @@ import checkImage from '../../../images/exercises/check.svg'
 
 import cn from 'classnames'
 import debounce from 'lodash.debounce'
+import Loader from '../../ui/Loader'
 
 const getRandomImage = (min, max) => {
 	min = Math.ceil(min)
@@ -89,7 +90,9 @@ const SingleExercises = () => {
 					height: 345,
 				}}
 			>
-				<Header />
+				<Header
+					backLink={isSuccess ? `/workout/${data.workoutLog}` : '/workouts'}
+				/>
 
 				{isSuccess && (
 					<div className={styles.heading}>
@@ -112,6 +115,8 @@ const SingleExercises = () => {
 					{errorCompleted && <Alert type='error' text={errorCompleted} />}
 				</div>
 				{isLoading || (isSuccess && data._id !== id) ? (
+					<Loader />
+				) : (
 					<div className={styles.wrapper}>
 						<div className={styles.row}>
 							<div>
@@ -201,7 +206,8 @@ const SingleExercises = () => {
 							</div>
 						))}
 					</div>
-				) : (
+				)}
+				{isSuccess && data?.times?.length === 0 && (
 					<Alert type='warning' text='Times not found' />
 				)}
 			</div>
