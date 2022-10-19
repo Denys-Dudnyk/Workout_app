@@ -38,7 +38,10 @@ export const updateExerciseLog = asyncHandler(async (req, res) => {
 export const updateCompleteExerciseLog = asyncHandler(async (req, res) => {
 	const { logId, completed } = req.body
 
-	const currentLog = await ExerciseLog.findById(logId)
+	const currentLog = await ExerciseLog.findById(logId).populate(
+		'exercise',
+		'workout'
+	)
 
 	if (!currentLog) {
 		res.status(404)
