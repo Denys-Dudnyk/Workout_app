@@ -29,6 +29,11 @@ app.use(express.json())
 const __dirname = path.resolve()
 app.use('/uploads', express.static(path.join(__dirname, '/uploads/')))
 
+app.use(express.static(path.join(__dirname, 'front/build')))
+app.get('*', (req, res) => {
+	res.sendFile(path.join(__dirname, '/front/build/index.html'))
+})
+
 app.use('/api/users', userRoutes)
 app.use('/api/exercises', exerciseRoutes)
 app.use('/api/workouts', workoutRoutes)
