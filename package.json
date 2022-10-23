@@ -7,7 +7,7 @@
 	"scripts": {
 		"build": "cd front && npm run build",
 		"install-front": "cd front && npm install",
-		"heroku-postbuild": "npm run install-front && npm run build",
+		"heroku-postbuild": "NPM_CONFIG_PRODUCTION npm run install-front && npm run build",
 		"server": "nodemon back/server.js",
 		"develop": "concurrently --kill-others-on-fail \"npm run server\" \"npm run start --prefix front\"",
 		"start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run start --prefix front\""
