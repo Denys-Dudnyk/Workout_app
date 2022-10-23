@@ -9,8 +9,8 @@
 		"install-front": "cd front && npm install",
 		"heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm run install-front && npm run build",
 		"server": "nodemon back/server.js",
-		"develop": "concurrently \"npm run server\" \"npm run start --prefix front\"",
-		"start": "concurrently \"npm run server\" \"npm run start --prefix front\""
+		"develop": "concurrently --kill-others-on-fail \"npm run server\" \"npm run start --prefix front\"",
+		"start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run start --prefix front\""
 	},
 	"author": "Denys Dudnyk",
 	"license": "ISC",
