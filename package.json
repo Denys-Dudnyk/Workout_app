@@ -5,11 +5,13 @@
 	"main": "server.js",
 	"type": "module",
 	"scripts": {
+		"server": "nodemon server/server",
+		"server-start": "node server/server",
+		"start": "concurrently \"npm run server-start\" \"npm run start --prefix front\"",
+		"dev": "concurrently \"npm run server\" \"npm run start --prefix front\"",
 		"build": "cd front && npm run build",
-		"heroku-postbuild": "cd front && npm install && npm run build",
-		"server": "nodemon back/server.js",
-		"develop": "concurrently --kill-others-on-fail \"npm run server\" \"npm run start --prefix front\"",
-		"start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run start --prefix front\""
+		"install-front": "cd front && npm install",
+		"heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix front && npm run build --prefix front"
 	},
 	"author": "Denys Dudnyk",
 	"license": "ISC",
