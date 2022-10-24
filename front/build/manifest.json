@@ -1,0 +1,44 @@
+{
+	"name": "Workout_app",
+	"short_name": "Workout_app",
+	"icons": [
+		{
+			"src": "favicon.ico",
+			"sizes": "64x64 32x32 24x24 16x16",
+			"type": "image/x-icon"
+		},
+		{
+			"src": "apple-touch-icon.png",
+			"type": "image/png",
+			"sizes": "180x180"
+		},
+		{
+			"src": "favicon-32x32.png",
+			"type": "image/png",
+			"sizes": "32x32"
+		},
+		{
+			"src": "favicon-16x16.png",
+			"type": "image/png",
+			"sizes": "16x16"
+		},
+		{
+			"src": "safari-pinned-tab.svg",
+			"color": "#5bbad5"
+		},
+		{
+			"src": "/android-chrome-192x192.png",
+			"type": "image/png",
+			"sizes": "192x192"
+		},
+		{
+			"src": "/android-chrome-256x256.png",
+			"type": "image/png",
+			"sizes": "256x256"
+		}
+	],
+	"start_url": ".",
+	"display": "standalone",
+	"theme_color": "#ffffff",
+	"background_color": "#ffffff"
+}
